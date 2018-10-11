@@ -105,4 +105,7 @@
         <label>Water required</label>
         <type>Checkbox</type>
     </fields>
+    <label>Trial Level</label>
+    <pluralLabel>Trial Levels</pluralLabel>
+    <visibility>Public</visibility>
 </CustomObject>
