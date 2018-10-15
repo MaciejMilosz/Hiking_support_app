@@ -16,10 +16,7 @@
         });
         action.setCallback(this, function(response) {
             var state = response.getState();
-
             if (state === "SUCCESS") {
-
-                alert("Your rating has been submitted!");
 
             }
         });

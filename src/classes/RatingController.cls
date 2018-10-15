@@ -15,15 +15,12 @@ public with sharing class RatingController {
     @AuraEnabled
     public static Rate__c saveRating(Rate__c rating) {
 
-        Rate__c[] oldRating= [Select id From Rate__c Where (CreatedById = :UserInfo.getUserId() AND Trial__c = :rating.Trial__c)];
+        Rate__c[] oldRating= [Select id From Rate__c Where (CreatedById = :UserInfo.getUserId() AND Trial__c = :rating.Trial__c) LIMIT 1];
 
-        if(oldRating.size() > 0){
-            oldRating[0].Rating__c = rating.Rating__c;
-            oldRating[0].Description__c = rating.Description__c;
-            update oldRating[0];
-        } else{
-            insert rating;
+        if(!oldRating.isEmpty()){
+            rating.Id = oldRating[0].Id;
         }
+        upsert rating;
 
         return rating;
     }
