@@ -47,6 +47,9 @@
 
         } else {
 
+//            var description = component.find('ratingForm');
+//            description.set("v.errors", [{message:"Please give a rating and a proper description"}]);
+
             alert("please give a Rating before submitting!");
 
         }
