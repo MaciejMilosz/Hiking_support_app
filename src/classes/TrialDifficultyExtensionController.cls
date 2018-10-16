@@ -25,23 +25,18 @@ public with sharing class TrialDifficultyExtensionController {
     */
     public Trial_Level__mdt getTrailDetails() {
 
-        if (currentTrial.Trial_Level__c != null) {
-            {
-                trialLevel = [
-                        SELECT Advanced_hiking_equipment_required__c, Advanced_hiking_footwear_required__c, Colour__c, Description__c,
-                                Dogs_allowed__c, Experienced_hikers_only__c, Difficulty_Level__c, For_Beginners__c,
-                                Kids_allowed__c, Water_required__c
-                        FROM Trial_Level__mdt
-                        WHERE Label = :this.currentTrial.Trial_Level__c
-                        LIMIT 1
-                ];
-                if (trialLevel.size() == 1) {
-                    return trialLevel[0];
-                }
-            }
-        }
+        trialLevel = [
+                SELECT Advanced_hiking_equipment_required__c, Advanced_hiking_footwear_required__c, Colour__c, Description__c,
+                        Dogs_allowed__c, Experienced_hikers_only__c, Difficulty_Level__c, For_Beginners__c,
+                        Kids_allowed__c, Water_required__c
+                FROM Trial_Level__mdt
+                WHERE Label = :this.currentTrial.Trial_Level__c
+        ];
 
-        return null;
+        if (trialLevel.isEmpty()) {
+            return null;
+        }
+        return trialLevel[0];
     }
 
     /*
@@ -73,21 +68,24 @@ public with sharing class TrialDifficultyExtensionController {
         Integer reminder;
         String hexString;
 
-        if(colourValue.size() == 1){
+        if (colourValue.size() == 1) {
+
             String temp = String.valueOf(colourValue[0].Colour__c).replace('.0', '');
             Integer colourValueInteger = Integer.valueOf(temp);
 
             while (colourValueInteger > 0) {
+
                 reminder = Math.mod(colourValueInteger, 16);
 
                 hexString = chars[reminder] + hexString;
 
                 colourValueInteger = colourValueInteger / 16;
             }
+
             hexString = hexString.replace('null', '');
             hexString = '#0' + hexString;
-        }
 
+        }
 
         return hexString;
     }

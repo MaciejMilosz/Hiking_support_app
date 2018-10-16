@@ -11,8 +11,9 @@ private class TestTrialDifficultyExtensionController {
         insert m;
 
         Trial__c trialTest = new Trial__c(Name = 'Test Trial',
-                Mountains__c = m.Id , Trial_Level__c = 'Level 1' );
+                Mountains__c = m.Id, Trial_Level__c = 'Level 1');
         insert trialTest;
+
 
         PageReference pageReference = Page.TrialDifficultyInformation;
         Test.setCurrentPage(pageReference);
@@ -22,17 +23,23 @@ private class TestTrialDifficultyExtensionController {
 
         TrialDifficultyExtensionController ex = new TrialDifficultyExtensionController(sc);
 
-        ex.getTrailDetails();
-        ex.getColour();
+        Trial_Level__mdt returnedObject = ex.getTrailDetails();
+        System.assertNotEquals(null, returnedObject);
 
-        Trial__c trialTest1 = new Trial__c(Name = 'Test1 Trial',
-                Mountains__c = m.Id);
-        insert trialTest1;
+        String returnedColour = ex.getColour();
+        System.assertEquals('#0d26', returnedColour);
 
-        sc = new ApexPages.StandardController(trialTest1);
-        ApexPages.currentPage().getParameters().put('id', trialTest1.Id);
+        trialTest.Trial_Level__c = null;
+        update trialTest;
+
+
+        sc = new ApexPages.StandardController(trialTest);
+        ApexPages.currentPage().getParameters().put('id', trialTest.Id);
         ex = new TrialDifficultyExtensionController(sc);
-        ex.getTrailDetails();
+
+        Trial_Level__mdt returnedNullObject = ex.getTrailDetails();
+        System.assertEquals(null, returnedNullObject);
+
     }
 
 }
