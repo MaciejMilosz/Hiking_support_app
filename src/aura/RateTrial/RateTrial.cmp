@@ -1,0 +1,65 @@
+<!--
+ - Created by drang on 10/11/2018.
+ -->
+
+<aura:component description="RateTrial" controller="RatingController" implements="force:lightningQuickAction,force:hasRecordId,flexipage:availableForAllPageTypes"  >
+
+    <aura:attribute name="recordId" type="String" />
+
+    <aura:attribute  name="newRating" type="Rate__c"
+                    default="{'sobjectType':'Rate__c',
+                    'Rating__c': 0,
+                    'Description__c': '',
+                    'Trial__c': ''}" />
+
+
+    <lightning:layout>
+        <lightning:layoutItem padding="around-small" size="6">
+
+            <lightning:layout >
+                <lightning:layoutItem padding="around-small" size="6">
+
+                    <div aria-labelledby="newRatingForm">
+
+                        <fieldset class="slds-box slds-theme--default slds-container--small">
+
+                            <div class="slds-text-heading_medium">Rate Trial</div>
+
+                            <form class="slds-form--stacked">
+                                <div style="display:inline-block;margin-right:10px" id='1' onclick="{!c.giveRating}">
+                                    <img aura:id='firstStar' src="https://cdn4.iconfinder.com/data/icons/CornerStone/PNG/star-0.png"/>
+                                </div>
+                                <div style="display:inline-block;margin-right:10px" id='2' onclick="{!c.giveRating}">
+                                    <img aura:id='secondStar' src="https://cdn4.iconfinder.com/data/icons/CornerStone/PNG/star-0.png"/>
+                                </div>
+                                <div style="display:inline-block;margin-right:10px" id='3' onclick="{!c.giveRating}">
+                                    <img aura:id='thirdStar' src="https://cdn4.iconfinder.com/data/icons/CornerStone/PNG/star-0.png"/>
+                                </div>
+                                <div style="display:inline-block;margin-right:10px" id='4' onclick="{!c.giveRating}">
+                                    <img aura:id='fourthStar' src="https://cdn4.iconfinder.com/data/icons/CornerStone/PNG/star-0.png"/>
+                                </div>
+                                <div style="display:inline-block;margin-right:10px" id='5' onclick="{!c.giveRating}">
+                                    <img aura:id='fifthStar' src="https://cdn4.iconfinder.com/data/icons/CornerStone/PNG/star-0.png"/>
+                                </div>
+
+                                <lightning:input aura:id="ratingForm" label="Description"
+                                                 name="description"
+                                                 value="{!v.newRating.Description__c}"
+                                                 placeholder="Great Trial"/>
+                                <lightning:button label="Rate"
+                                                  class="slds-m-top--medium"
+                                                  variant="brand"
+                                                  onclick="{!c.clickCreate}"/>
+                            </form>
+
+                        </fieldset>
+
+                    </div>
+
+                </lightning:layoutItem>
+            </lightning:layout>
+
+        </lightning:layoutItem>
+    </lightning:layout>
+
+</aura:component>
