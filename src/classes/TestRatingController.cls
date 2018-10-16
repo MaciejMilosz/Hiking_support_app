@@ -20,8 +20,12 @@ public with sharing class TestRatingController {
         RatingController.saveRating(testRating);
         Test.stopTest();
 
-        Rate__c savedRating = [Select id,Trial__c,Rating__c, Description__c  FROM Rate__c Where Trial__c = :testTrial.Id AND Rating__c = 5 AND Description__c = 'awesome'];
+        Rate__c savedRating = [Select id,Trial__c,Rating__c, Description__c  FROM Rate__c LIMIT 1];
+
         System.assertEquals(savedRating, testRating);
+        System.assertEquals(savedRating.Description__c, testRating.Description__c);
+        System.assertEquals(savedRating.Rating__c, testRating.Rating__c);
+
 
     }
 
@@ -43,9 +47,11 @@ public with sharing class TestRatingController {
         RatingController.saveRating(newRating);
         Test.stopTest();
 
-        Rate__c savedRating = [Select id,Trial__c,Rating__c, Description__c  FROM Rate__c Where Trial__c = :testTrial.Id AND Rating__c = 4 AND Description__c = 'very challenging'];
-        System.assertEquals(savedRating, newRating);
+        Rate__c savedRating = [Select id,Trial__c,Rating__c, Description__c  FROM Rate__c LIMIT 1];
 
+        System.assertEquals(savedRating, newRating);
+        System.assertEquals(savedRating.Description__c, newRating.Description__c);
+        System.assertEquals(savedRating.Rating__c, newRating.Rating__c);
     }
 
 
