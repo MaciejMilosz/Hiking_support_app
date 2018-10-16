@@ -83,6 +83,7 @@ public with sharing class TrialDifficultyExtensionController {
             }
 
             hexString = hexString.replace('null', '');
+
             hexString = '#0' + hexString;
 
         }
