@@ -47,10 +47,14 @@
 
         } else {
 
-//            var description = component.find('ratingForm');
-//            description.set("v.errors", [{message:"Please give a rating and a proper description"}]);
+            var toastEvent = $A.get("e.force:showToast");
+                            toastEvent.setParams({
+                                title: "Error!",
+                                message: "Please give a 1-5 Rating before submitting!",
+                                type: "error"
+                            });
+                            toastEvent.fire();
 
-            alert("please give a Rating before submitting!");
 
         }
 
