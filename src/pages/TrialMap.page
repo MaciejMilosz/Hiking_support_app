@@ -1,0 +1,62 @@
+<!--
+ - Created by drang on 10/19/2018.
+ -->
+
+<apex:page id="TrialMap" standardController="Trial__c" extensions="TrialCoordinatesExtension">
+
+    <head>
+        <title>Simple Map</title>
+        <meta name="viewport" content="initial-scale=1.0"/>
+        <meta charset="utf-8"/>
+        <style>
+      #map {
+        height: 100%;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    </head>
+
+    <body>
+
+    <div id="map"/>
+
+    <script>
+      var startCoordinates = {lat: {!trial.Start_point__Latitude__s}, lng: {!trial.Start_point__Longitude__s}};
+      var endCoordinates = {lat: {!trial.End_point__Latitude__s}, lng: {!trial.End_point__Longitude__s}};
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+        });
+        var startMarker = new google.maps.Marker({
+            position: startCoordinates,
+            map: map,
+            label: 'A',
+        });
+        var endMarker = new google.maps.Marker({
+            position: endCoordinates,
+            map: map,
+            label: 'B',
+        });
+        var markers = [startMarker, endMarker]
+
+        var bounds = new google.maps.LatLngBounds();
+        for(i=0;i<markers.length;i++) {
+            bounds.extend(markers[i].getPosition());
+        }
+
+        //center the map to the geometric center of all markers
+        map.setCenter(bounds.getCenter());
+        map.fitBounds(bounds);
+
+      }
+    </script>
+    <script  type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6RHxCy4T-FWF2aU5RJ7xNlfBNUvQnp4w&callback=initMap" ></script>
+
+
+    </body>
+
+</apex:page>
