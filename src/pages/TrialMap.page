@@ -57,11 +57,13 @@
             var startMarker = new google.maps.Marker({
                 position: startCoordinates,
                 map: map,
+                draggable: true,
                 label: 'A',
             });
             var endMarker = new google.maps.Marker({
                 position: endCoordinates,
                 map: map,
+                draggable: true,
                 label: 'B',
             });
             var markers = [startMarker, endMarker]
@@ -73,11 +75,29 @@
             //center the map to the geometric center of all markers
             map.setCenter(bounds.getCenter());
             map.fitBounds(bounds);
+
+            sforce.connection.sessionId = '{!$Api.Session_ID}';
+            var result = sforce.connection.query("SELECT Id,Start_point__Latitude__s,Start_point__Longitude__s FROM Trial__c WHERE id = \'{!trial.id}\' LIMIT 1");
+            var records = result.getArray('records');
+            var trial = records[0];
+
+            google.maps.event.addListener(startMarker, 'dragend', function(evt){
+                trial.Start_point__Latitude__s = evt.latLng.lat();
+                trial.Start_point__Longitude__s = evt.latLng.lng();
+                sforce.connection.update([trial]);
+            });
+
+            google.maps.event.addListener(endMarker, 'dragend', function(evt){
+                trial.End_point__Latitude__s = evt.latLng.lat();
+                trial.End_point__Longitude__s = evt.latLng.lng();
+                sforce.connection.update([trial]);
+            });
         }
     }
     </script>
-    <script  type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6RHxCy4T-FWF2aU5RJ7xNlfBNUvQnp4w&callback=initMap" ></script>
 
+    <script src="/soap/ajax/43.0/connection.js" type="text/javascript"></script>
+    <script  type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6RHxCy4T-FWF2aU5RJ7xNlfBNUvQnp4w&callback=initMap" ></script>
 
     </body>
 
