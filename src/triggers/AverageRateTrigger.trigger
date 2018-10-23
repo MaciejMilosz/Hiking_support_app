@@ -19,7 +19,6 @@ trigger AverageRateTrigger on Rate__c (before insert, before update, before dele
                 trial.Average_rate_trigger__c = newAvgRating;
 
             }
-
             if (Trigger.isUpdate) {
 
                 Decimal oldRating = Trigger.oldMap.get(rate.Id).Rating__c;
