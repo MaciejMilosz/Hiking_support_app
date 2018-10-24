@@ -30,10 +30,10 @@
     <script>
     function initMap() {
 
-        var startLat = Number('{!trial.Start_point__Latitude__s}');
-        var startLng = Number('{!trial.Start_point__Longitude__s}');
-        var endLat = Number('{!trial.End_point__Latitude__s}');
-        var endLng = Number('{!trial.End_point__Longitude__s}');
+        var startLat = Number({!trial.Start_point__Latitude__s});
+        var startLng = Number({!trial.Start_point__Longitude__s});
+        var endLat = Number({!trial.End_point__Latitude__s});
+        var endLng = Number({!trial.End_point__Longitude__s});
 
         var map = new google.maps.Map(document.getElementById('map'), {
             //default values - used when coordinates are not given
