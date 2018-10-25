@@ -6,7 +6,7 @@ public with sharing class CheckMountains {
     @InvocableMethod (label='Check Mountains')
     public static List<Boolean> checkMountains(List<String> names){
         Map<String, Mountains__c> mtsMap = new Map<String, Mountains__c>();
-        for( Mountains__c mt : [SELECT Id, Name, LastModifiedBy, LastModifiedDate FROM Mountains__c WHERE Name IN :names]){
+        for( Mountains__c mt : [SELECT Id, Name, CreatedDate, CreatedById FROM Mountains__c WHERE Name IN :names]){
             mtsMap.put(mt.Name, mt);
         }
         List<Boolean> retList = new List<Boolean>();
