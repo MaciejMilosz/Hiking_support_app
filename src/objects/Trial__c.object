@@ -39,7 +39,7 @@
     <actionOverrides>
         <actionName>View</actionName>
         <comment>Action override created by Lightning App Builder during activation.</comment>
-        <content>Trial</content>
+        <content>Rate</content>
         <formFactor>Large</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>Flexipage</type>
@@ -57,9 +57,10 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
+    <fields>
         <fullName>Average_rate_formula__c</fullName>
         <externalId>false</externalId>
-        <formula>Sum_rating__c  /  Count_rating__c</formula>
+        <formula>Average_Rate_Sum__c  /  Count_of_Rates__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Average rate formula</label>
         <precision>18</precision>
@@ -82,9 +83,31 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Count_rating__c</fullName>
+        <fullName>Average_Rate_Sum__c</fullName>
         <externalId>false</externalId>
-        <label>Count rating</label>
+        <label>Average Rate Sum</label>
+        <summarizedField>Rate__c.Rating__c</summarizedField>
+        <summaryForeignKey>Rate__c.Trial__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Average_Rate__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Average Rate</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Count_of_Rates__c</fullName>
+        <externalId>false</externalId>
+        <label>Count of Rates</label>
         <summaryForeignKey>Rate__c.Trial__c</summaryForeignKey>
         <summaryOperation>count</summaryOperation>
         <trackTrending>false</trackTrending>
@@ -131,16 +154,6 @@
         <scale>7</scale>
         <trackTrending>false</trackTrending>
         <type>Location</type>
-    </fields>
-    <fields>
-        <fullName>Sum_rating__c</fullName>
-        <externalId>false</externalId>
-        <label>Sum rating</label>
-        <summarizedField>Rate__c.Rating__c</summarizedField>
-        <summaryForeignKey>Rate__c.Trial__c</summaryForeignKey>
-        <summaryOperation>sum</summaryOperation>
-        <trackTrending>false</trackTrending>
-        <type>Summary</type>
     </fields>
     <fields>
         <fullName>Trial_Level__c</fullName>

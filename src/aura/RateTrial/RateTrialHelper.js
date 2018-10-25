@@ -18,6 +18,14 @@
             var state = response.getState();
             if (state === "SUCCESS") {
 
+                var toastEvent = $A.get("e.force:showToast");
+                toastEvent.setParams({
+                    title: "Success!",
+                    message: "Your rating has been submitted successfully!",
+                    type: "success"
+                });
+                toastEvent.fire();
+
             }
         });
         $A.enqueueAction(action);
