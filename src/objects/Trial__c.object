@@ -57,6 +57,32 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
+    <fields>
+        <fullName>Average_rate_formula__c</fullName>
+        <externalId>false</externalId>
+        <formula>Average_Rate_Sum__c  /  Count_of_Rates__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Average rate formula</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Average_rate_trigger__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Average rate trigger</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Average_Rate_Sum__c</fullName>
         <externalId>false</externalId>
         <label>Average Rate Sum</label>
@@ -133,7 +159,7 @@
         <fullName>Trial_Level__c</fullName>
         <externalId>false</externalId>
         <label>Trial Level</label>
-        <required>false</required>
+        <required>true</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
