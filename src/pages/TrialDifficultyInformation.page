@@ -2,57 +2,39 @@
  - Created by hstoy on 10/11/2018.
  -->
 <apex:page standardController="Trial__c" extensions="TrialDifficultyExtensionController">
-    <apex:slds />
+    <apex:slds/>
 
 
     <apex:pageMessage rendered="{! ISNULL(trailDetails)}" severity="info"
                       summary="No trial level specified for this trial"/>
 
+    <apex:form rendered="{! IF(ISNULL(trailDetails), false, true)}">
+        <apex:pageBlock>
+            <apex:pageBlockSection>
+                <apex:outputField value="{! trailDetails.Advanced_hiking_equipment_required__c}"/>
 
-    <apex:outputPanel rendered="{! IF(ISNULL(trailDetails), false, true)}">
+                <apex:outputField value="{! trailDetails.Advanced_hiking_footwear_required__c}"/>
 
-        <apex:outputLabel value="Advanced hiking equipment required: "/>
-        <apex:outputField value="{! trailDetails.Advanced_hiking_equipment_required__c}"/>
-        <br/>
+                <apex:outputLabel value="Colour: "/>
+                <apex:outputText styleClass="colour-box"/>
 
-        <apex:outputLabel value="Advanced hiking footwear required: "/>
-        <apex:outputField value="{! trailDetails.Advanced_hiking_footwear_required__c}"/>
-        <br/>
-
-        <apex:outputLabel value="Colour: "/>
-        <apex:outputText styleClass="colour-box"/>
-        <br/>
-
-        <apex:outputText value="Description:
+                <apex:outputText value="Description:
                         {! trailDetails.Description__c}"/>
-        <br/>
 
-        <apex:outputLabel value="Dogs allowed: "/>
-        <apex:outputField value="{! trailDetails.Dogs_allowed__c}"/>
-        <br/>
+                <apex:outputField value="{! trailDetails.Dogs_allowed__c}"/>
 
-        <apex:outputLabel value="Experienced hikers only: "/>
-        <apex:outputField value="{! trailDetails.Experienced_hikers_only__c}"/>
-        <br/>
+                <apex:outputField value="{! trailDetails.Experienced_hikers_only__c}"/>
 
-        <apex:outputLabel value="Experience Level: "/>
-        <apex:outputField value="{! trailDetails.Difficulty_Level__c}"/>
-        <br/>
+                <apex:outputField value="{! trailDetails.Difficulty_Level__c}"/>
 
-        <apex:outputLabel value="For Beginners: "/>
-        <apex:outputField value="{! trailDetails.For_Beginners__c}"/>
-        <br/>
+                <apex:outputField value="{! trailDetails.For_Beginners__c}"/>
 
-        <apex:outputLabel value="Kids allowed: "/>
-        <apex:outputField value="{! trailDetails.Kids_allowed__c}"/>
-        <br/>
+                <apex:outputField value="{! trailDetails.Kids_allowed__c}"/>
 
-        <apex:outputLabel value="Water required: "/>
-        <apex:outputField value="{! trailDetails.Water_required__c}"/>
-        <br/>
-
-
-    </apex:outputPanel>
+                <apex:outputField value="{! trailDetails.Water_required__c}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
 
     <style>
         .colour-box {
